@@ -1,0 +1,74 @@
+name: Docker Integration Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Dockerfile'
+      - 'docker-compose*.yml'
+      - 'requirements.txt'
+
+jobs:
+  docker-test:
+    name: Test Docker Build and Compose
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      run: |
+        docker build -t devops-todo-app:test .
+
+    - name: Test Docker image
+      run: |
+        # Run basic container test
+        docker run --rm -d --name test-app -p 5000:5000 \
+          -e DATABASE_URL=sqlite:///test.db \
+          devops-todo-app:test
+        
+        # Wait for container to start
+        sleep 10
+        
+        # Test health endpoint
+        curl -f http://localhost:5000/health || exit 1
+        
+        # Stop container
+        docker stop test-app
+
+    - name: Test Docker Compose
+      run: |
+        # Test compose build
+        docker-compose build
+        
+        # Test compose up (background)
+        docker-compose up -d
+        
+        # Wait for services
+        sleep 20
+        
+        # Test application
+        curl -f http://localhost:5000/health || exit 1
+        curl -f http://localhost:5000/api/tasks || exit 1
+        
+        # Check logs
+        docker-compose logs web
+        
+        # Cleanup
+        docker-compose down -v
+
+    - name: Test multi-stage build efficiency
+      run: |
+        # Build and check image size
+        docker build -t devops-todo-app:size-test .
+        
+        # Get image size
+        SIZE=$(docker images devops-todo-app:size-test --format "table {{.Size}}" | tail -n 1)
+        echo "Final image size: $SIZE"
+        
+        # Basic size check (should be under 200MB for Python app)
+        docker images devops-todo-app:size-test
