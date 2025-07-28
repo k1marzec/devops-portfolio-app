@@ -245,6 +245,3 @@ This project showcases the following DevOps practices and skills:
 
 ---
 
-**Built with ❤️ for DevOps Excellence**
-
-*This project serves as a comprehensive demonstration of modern DevOps practices and can be used as a reference for building production-ready applications with proper CI/CD pipelines.*

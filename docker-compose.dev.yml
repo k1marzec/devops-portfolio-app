@@ -1,7 +1,5 @@
 version: '3.8'
 
-# Development override for docker-compose.yml
-# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 services:
   web:
@@ -11,13 +9,12 @@ services:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
     volumes:
-      # Mount source code for live reloading
       - .:/app
       - /app/__pycache__
     command: python run.py
     ports:
       - "5000:5000"
 
-  # Enable pgAdmin in development
+
   pgadmin:
-    profiles: []  # Override the 'dev' profile to make it always available
+    profiles: []  

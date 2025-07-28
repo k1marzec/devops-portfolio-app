@@ -16,11 +16,9 @@ def create_app(config_name=None):
     
     app.config.from_object(config[config_name])
     
-    # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)
     
-    # Configure logging
     if not app.debug and not app.testing:
         if not os.path.exists('logs'):
             os.mkdir('logs')
@@ -33,7 +31,6 @@ def create_app(config_name=None):
         app.logger.setLevel(logging.INFO)
         app.logger.info('Todo App startup')
     
-    # Register blueprints
     from app.routes import bp as main_bp
     app.register_blueprint(main_bp)
     

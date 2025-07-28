@@ -20,31 +20,26 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
 venv/
 env/
 ENV/
 env.bak/
 venv.bak/
 
-# Flask
 instance/
 .webassets-cache
 *.db
 
-# Environment variables
 .env
 .env.local
 .env.production
 
-# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -53,18 +48,14 @@ instance/
 ehthumbs.db
 Thumbs.db
 
-# Logs
 logs/
 *.log
 
-# Testing
 .coverage
 .pytest_cache/
 .tox/
 htmlcov/
 
-# Docker
 .dockerignore
 
-# Application specific
 migrations/versions/

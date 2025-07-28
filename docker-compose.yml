@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Web application
   web:
     build: 
       context: .
@@ -27,7 +26,6 @@ services:
       retries: 3
       start_period: 10s
 
-  # PostgreSQL database
   db:
     image: postgres:15-alpine
     environment:
@@ -48,7 +46,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # pgAdmin for database management (optional - for development)
+
   pgadmin:
     image: dpage/pgadmin4:latest
     environment:
@@ -66,14 +64,13 @@ services:
     profiles:
       - dev
 
-# Named volumes for data persistence
+
 volumes:
   postgres_data:
     driver: local
   pgadmin_data:
     driver: local
 
-# Network for service communication
 networks:
   app-network:
     driver: bridge
