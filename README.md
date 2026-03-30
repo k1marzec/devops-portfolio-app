@@ -7,7 +7,7 @@
 
 A comprehensive DevOps portfolio project demonstrating modern software development and deployment practices.
 
-## 🚀 Features
+##  Features
 
 - **Full-Stack Web Application**: Flask-based todo application with PostgreSQL
 - **Containerization**: Multi-stage Docker builds with Docker Compose orchestration
@@ -17,7 +17,7 @@ A comprehensive DevOps portfolio project demonstrating modern software developme
 - **Security**: Vulnerability scanning with Trivy, secure container practices
 - **Testing**: Unit tests, integration tests, and smoke tests
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -33,7 +33,7 @@ A comprehensive DevOps portfolio project demonstrating modern software developme
                     └──────────────────┘
 ```
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### Backend
 - **Flask 2.3.3** - Web framework
@@ -53,7 +53,7 @@ A comprehensive DevOps portfolio project demonstrating modern software developme
 - **pip** - Package management
 - **Git** - Version control
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Docker and Docker Compose
@@ -91,7 +91,7 @@ python run.py
 python manual_test.py
 ```
 
-## 🧪 Testing
+##  Testing
 
 The project includes comprehensive testing at multiple levels:
 
@@ -110,7 +110,7 @@ python manual_test.py
 docker-compose -f docker-compose.test.yml up --build
 ```
 
-## 🏭 CI/CD Pipeline
+##  CI/CD Pipeline
 
 The project uses GitHub Actions for automated CI/CD with the following stages:
 
@@ -134,7 +134,7 @@ The project uses GitHub Actions for automated CI/CD with the following stages:
    - Smoke tests execution
    - Deployment verification
 
-## 🐳 Docker
+##  Docker
 
 ### Multi-Stage Build
 The Dockerfile uses multi-stage builds for optimization:
@@ -148,7 +148,7 @@ The Dockerfile uses multi-stage builds for optimization:
 - Resource optimization
 - Security scanning
 
-## 📊 API Endpoints
+##  API Endpoints
 
 | Endpoint | Method | Description |
 |----------|---------|-------------|
@@ -175,7 +175,7 @@ The Dockerfile uses multi-stage builds for optimization:
 - **db**: PostgreSQL database
 - **pgadmin**: Database administration (development)
 
-## 🚀 Deployment
+##  Deployment
 
 ### Production Deployment
 
@@ -190,14 +190,14 @@ The application is production-ready with:
 
 Automated staging deployments happen on every push to `main` branch through GitHub Actions.
 
-## 📈 Monitoring & Observability
+## Monitoring & Observability
 
 - **Health Checks**: `/health` endpoint for service monitoring
 - **Structured Logging**: JSON-formatted logs for analysis
 - **Metrics**: Application performance tracking
 - **Docker Health Checks**: Container-level health monitoring
 
-## 👥 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -205,39 +205,39 @@ Automated staging deployments happen on every push to `main` branch through GitH
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🎯 DevOps Skills Demonstrated
+##  DevOps Skills Demonstrated
 
 This project showcases the following DevOps practices and skills:
 
-### ✅ Development Practices
+###  Development Practices
 - Clean code architecture
 - Test-driven development
 - Version control with Git
 - Code review process
 
-### ✅ Containerization & Orchestration
+###  Containerization & Orchestration
 - Docker multi-stage builds
 - Docker Compose orchestration
 - Container security best practices
 - Image optimization
 
-### ✅ CI/CD & Automation
+###  CI/CD & Automation
 - GitHub Actions workflows
 - Automated testing
 - Security scanning
 - Container registry integration
 
-### ✅ Infrastructure & Deployment
+###  Infrastructure & Deployment
 - Infrastructure as Code
 - Environment management
 - Deployment automation
 - Service orchestration
 
-### ✅ Monitoring & Operations
+###  Monitoring & Operations
 - Health checks implementation
 - Structured logging
 - Performance monitoring
