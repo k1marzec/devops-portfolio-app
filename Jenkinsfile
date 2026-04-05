@@ -21,25 +21,49 @@ pipeline {
                 echo 'Przygotowuję binarkę Terraforma...'
                 sh '''
                     curl -LO https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
-                    
                     unzip -o terraform_1.5.7_linux_amd64.zip -d terraform/
+                    chmod +x terraform/terraform
                 '''
             }
         }
-        
-        stage('Terraform Init & Plan') {
+
+        stage('Terraform Init') {
             steps {
-                echo 'Uruchamiam planowanie infrastruktury na Azure...'
+                echo 'Inicjalizuję Terraform z remote backend (Azure Storage)...'
                 sh '''
                     cd terraform/
-                    
-                    chmod +x terraform
-                    
-                    ./terraform init 
-                    ./terraform plan
-                    ./terraform apply --auto-approve
+                    ./terraform init
                 '''
             }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                echo 'Planuję zmiany infrastruktury...'
+                sh '''
+                    cd terraform/
+                    ./terraform plan -out=tfplan
+                '''
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                echo 'Wdrażam infrastrukturę na Azure...'
+                sh '''
+                    cd terraform/
+                    ./terraform apply tfplan
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo ' Infrastruktura wdrożona pomyślnie!'
+        }
+        failure {
+            echo ' Pipeline zakończony błędem. Sprawdź logi.'
         }
     }
 }
