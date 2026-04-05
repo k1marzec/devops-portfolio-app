@@ -16,7 +16,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "test_rg" {
-  name     = "rg-terraform-test-pko"
+  name     = "rg-terraform-karolina"
   location = "West Europe"
 }
 
