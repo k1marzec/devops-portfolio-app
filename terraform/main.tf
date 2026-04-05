@@ -42,16 +42,16 @@ resource "azurerm_linux_web_app" "todo_app" {
   site_config {
     always_on = false 
     application_stack {
-      # POPRAWKA: Używamy docker_image_name zamiast docker_image
       docker_image_name = "k1marzec/devops-portfolio-app:latest"
     }
   }
 
   app_settings = {
-    "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io/v1"
-    "WEBSITES_PORT"              = "5000" 
+    "WEBSITES_PORT" = "5000" 
   }
 }
+
+
 
 output "app_url" {
   value = "https://${azurerm_linux_web_app.todo_app.default_hostname}"
