@@ -4,17 +4,25 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.0.0"
     }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.0.0"
+    }
   }
 }
 
 provider "azurerm" {
   features {}
-
 }
 
 resource "azurerm_resource_group" "test_rg" {
   name     = "rg-terraform-test-pko"
   location = "West Europe"
+}
+
+resource "random_integer" "suffix" {
+  min = 10000
+  max = 99999
 }
 
 resource "azurerm_service_plan" "todo_plan" {
@@ -34,8 +42,8 @@ resource "azurerm_linux_web_app" "todo_app" {
   site_config {
     always_on = false 
     application_stack {
-      docker_image     = "k1marzec/devops-portfolio-app" 
-      docker_image_tag = "latest"
+      # POPRAWKA: Używamy docker_image_name zamiast docker_image
+      docker_image_name = "k1marzec/devops-portfolio-app:latest"
     }
   }
 
@@ -43,11 +51,6 @@ resource "azurerm_linux_web_app" "todo_app" {
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io/v1"
     "WEBSITES_PORT"              = "5000" 
   }
-}
-
-resource "random_integer" "suffix" {
-  min = 10000
-  max = 99999
 }
 
 output "app_url" {
