@@ -66,14 +66,13 @@ The project uses a **dual-pipeline architecture** separating application CI from
 ### DevOps & Infrastructure
 - **Docker** — Containerization (multi-stage builds)
 - **Docker Compose** — Multi-container orchestration
-- **Kubernetes** — Local cluster orchestration (Deployments, Services)
+- **Kubernetes (Minikube)** — Local cluster orchestration (Deployments, Services)
 - **GitHub Actions** — Application CI/CD pipeline
 - **Jenkins (Groovy)** — Infrastructure deployment pipeline
 - **Terraform (HCL)** — Infrastructure as Code (Azure provider)
 - **Azure Storage Account** — Terraform remote backend for state management
 - **Microsoft Azure** — Cloud deployment (App Service, IAM/RBAC, CLI)
 - **Docker Hub** — Container registry
-- **Trivy** — Security scanning
 - **pytest** — Testing framework
 
 ---
@@ -114,9 +113,40 @@ Azure infrastructure is fully managed via Terraform:
 
 - Azure Service Principals with RBAC for least-privilege access
 - Jenkins Credentials Provider for secret injection (no hardcoded credentials)
-- Trivy vulnerability scanning on every build
 - Non-root user execution in Docker containers
 - HTTPS enforced on Azure App Service
+
+---
+
+## Kubernetes Local Deployment
+
+The application can be orchestrated locally using Minikube.
+
+### Prerequisites
+- Minikube installed and running (`minikube start`)
+- kubectl configured
+
+### Deploy to local cluster
+
+```bash
+# Deploy PostgreSQL
+kubectl apply -f k8s/postgres.yaml
+
+# Deploy the application
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+
+# Check status
+kubectl get pods
+
+# Access the application
+minikube service todo-app-service
+```
+
+### Kubernetes manifests
+- `k8s/postgres.yaml` — PostgreSQL Deployment + Service
+- `k8s/deployment.yaml` — Todo app Deployment with liveness/readiness probes
+- `k8s/service.yaml` — NodePort Service exposing the app
 
 ---
 
@@ -179,7 +209,7 @@ docker-compose -f docker-compose.test.yml up --build
 
 - `/health` endpoint for service-level health checks
 - Docker-level health checks on all containers
-- Structured JSON logging for log analysis
+- **Structured JSON logging** — logs written to `logs/app.log` in JSON format for easy parsing and analysis
 - Custom application metrics and performance tracking
 
 ---
